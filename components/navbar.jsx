@@ -19,7 +19,7 @@ const Navbar = () => {
             className="h-18 py-1 w-auto object-contain"
           />
         </Link>
-        <div className="flex items-center space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4 ">
         <SignedIn>
             <Link href={"/dashboard"}>
             <Button>
@@ -66,7 +66,7 @@ const Navbar = () => {
             <DialogContent className="max-w-md bg-white/80 backdrop-blur-xl border-none shadow-xl rounded-2xl p-6 flex justify-center">
               <DialogTitle className="sr-only">Sign In</DialogTitle>{" "}
               
-              <SignIn
+              <SignIn 
                 routing="hash"
                 appearance={{
                     elements: {
@@ -78,7 +78,9 @@ const Navbar = () => {
           </Dialog>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <UserButton
+          afterSignOutUrl="/"
+          />
         </SignedIn>
         </div>
       </nav>

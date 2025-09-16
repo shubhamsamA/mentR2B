@@ -26,11 +26,9 @@ export default function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Navbar/>
-          <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 bg-black">
-           <main>
-            {children}
-            </main> 
+          <Navbar />
+          <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 bg-black relative">
+            <main className="relative z-10">{children}</main>
           </BackgroundLines>
         </body>
       </html>
