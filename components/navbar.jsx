@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SignedIn, SignedOut, SignIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
+
 import { ChevronDown, FileText, LayoutDashboard, StarsIcon } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
@@ -59,23 +59,10 @@ const Navbar = () => {
         </SignedIn>
 
         <SignedOut>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="font-black">Sign In</Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md bg-white/80 backdrop-blur-xl border-none shadow-xl rounded-2xl p-6 flex justify-center">
-              <DialogTitle className="sr-only">Sign In</DialogTitle>{" "}
-              
-              <SignIn 
-                routing="hash"
-                appearance={{
-                    elements: {
-                        card: "shadow-none border-none bg-transparent",
-                    },
-                }}
-                />
-            </DialogContent>
-          </Dialog>
+         <SignInButton mode="modal">
+          <Button>
+            Login
+            </Button></SignInButton>
         </SignedOut>
         <SignedIn>
           <UserButton
