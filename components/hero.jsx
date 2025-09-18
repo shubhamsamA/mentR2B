@@ -2,10 +2,33 @@
 import Link from "next/link"
 import { Button } from "./ui/button"
 import Image from "next/image"
+import { useEffect, useRef } from "react"
 
 const HeroSection = () => {
+ const imageRef = useRef(null);
+
+  useEffect(() => {
+    const imageElement = imageRef.current;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = 100; 
+      const clamped = Math.min(scrollY, maxScroll);
+
+      const rotate = 15 - (clamped / maxScroll) * 15; 
+      const translateY = (clamped / maxScroll) * 40;  
+
+      if (imageElement) {
+        imageElement.style.transform = `rotateX(${rotate}deg) translateY(${translateY}px) scale(1)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="w-full pt-36 md:pt-48 pb-10 ">
+    <section className="w-full pt-36 md:pt-48 pb-10 overflow-x-hidden">
     <div className="space-y-6 text-center">
         <div className="space-y-6 mx-auto">
             <h1 className="gradient font-extrabold tracking-tighter  text-transparent bg-clip-text pb-2 pr-2 text-4xl md:text-6xl lg:text-7xl xl:text-8xl">
@@ -19,7 +42,7 @@ const HeroSection = () => {
         </div>
         <div className="space-x-5">
             <Link href="/dashboard">
-                <Button szie="lg" className="px-8 cursor-pointer">
+                <Button size="lg" className="px-8 cursor-pointer">
                     Get Started    
                 </Button>
             </Link>
@@ -29,8 +52,8 @@ const HeroSection = () => {
             </Button>
             </Link>
         </div>
-        <div >
-            <div>
+       <div className="hero-image-wrapper mt-5 md:mt-0  p-2">
+          <div ref={imageRef} className="hero-image rounded-l  shadow-2xl mx-auto " >
                 <Image
                 src={"/banner.jpg"}
                 width={1280}

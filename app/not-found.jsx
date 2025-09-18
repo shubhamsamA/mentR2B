@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,7 +18,7 @@ export default function Custom404() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center  text-white px-4">
      
-      <div className="mt-2 animate-float">
+      <div className="mt-7 animate-float ">
         <Image
           src="/astr.png"
           alt="Lost in Space Astronaut"
@@ -29,21 +30,20 @@ export default function Custom404() {
       </div>
 
       <div className="text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold">
+        <h2 className="text-2xl md:text-3xl font-semibold text-red-300">
           Lost in Space{dots}
         </h2>
-        <p className="mt-3 text-gray-400 max-w-md mx-auto font-bold">
+        <p className="  max-w-md mx-auto font-bold text-red-300">
           The page you’re looking for doesn’t exist or has been moved. Our
           astronaut couldn’t find it either
         </p>
       </div>
 
-      <Link
-        href="/"
-        className="mt-10 px-6 py-3 text-lg font-medium rounded-md bg-red-500 hover:bg-red-600 transition-colors shadow-lg shadow-red-500/40"
-      >
-        Go Home
-      </Link>
+        <Link href="/">
+            <Button size="lg" variant="GO">
+               Go Home 
+            </Button>
+            </Link>
     </div>
   );
 }

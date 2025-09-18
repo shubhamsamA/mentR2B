@@ -16,7 +16,7 @@ const Navbar = () => {
             alt="Mentr2B"
             width={300}
             height={60}
-            className="h-18 py-1 w-auto object-contain"
+            className="h-[72px] py-1 w-auto object-contain"
           />
         </Link>
         <div className="flex items-center space-x-2 md:space-x-4 ">
@@ -36,19 +36,19 @@ const Navbar = () => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                         <Link href={"/interview"} className="flex items-center gap-2">
                             <FileText className="h-4 w-4"/>
                             <span>Mock Interview</span>                            
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                         <Link href={"/resume"} className="flex items-center gap-2">
                             <FileText className="h-4 w-4"/>
                             <span>Build Resume</span>                            
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                         <Link href={"/ai-cover-letter"} className="flex items-center gap-2">
                             <FileText className="h-4 w-4"/>
                             <span>Cover Letter</span>                            
