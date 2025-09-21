@@ -1,14 +1,17 @@
 import WobbleCardDemo from "@/components/feature";
+import { Freq } from "@/components/freq";
 import HeroSection from "@/components/hero";
+import { Testimonial } from "@/components/testimonial";
 import { CountingNumber } from "@/components/ui/shadcn-io/counting-number";
+import { Working } from "@/components/work";
 
 export default function Home() {
   return (
     <div>
       <HeroSection />
       <WobbleCardDemo />
-      <section className="w-full py-12 md:py-24 bg-muted/50">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="w-full py-12 md:py-24  bg-white/5 rounded-2xl text-white ">
+        <div className="container mx-auto px-4 md:px-6 ">
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center space-y-2">
               <h3 className="text-4xl font-bold">
@@ -52,6 +55,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Working/>
+      <Testimonial/>
+      <Freq/>
     </div>
   );
 }

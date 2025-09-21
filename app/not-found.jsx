@@ -6,14 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Custom404() {
-  const [dots, setDots] = useState(".");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prev) => (prev.length === 3 ? "." : prev + "."));
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center  text-white px-4">
@@ -30,10 +23,10 @@ export default function Custom404() {
       </div>
 
       <div className="text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold text-red-300">
-          Lost in Space{dots}
+        <h2 className="text-2xl md:text-3xl font-black text-white pb-1">
+          Lost in Space
         </h2>
-        <p className="  max-w-md mx-auto font-bold text-red-300">
+        <p className="  max-w-md mx-auto font-black text-white mb-3">
           The page you’re looking for doesn’t exist or has been moved. Our
           astronaut couldn’t find it either
         </p>
