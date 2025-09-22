@@ -5,8 +5,10 @@ import { Button } from "./ui/button";
 
 import { ChevronDown, FileText, LayoutDashboard, StarsIcon } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { checkUser } from "@/lib/checkUser";
 
-const Navbar = () => {
+const Navbar = async () => {
+  await checkUser();
   return (
     <header className="fixed top-0 w-full border-b bg-black backdrop-blur-md z-50 supports-[backdrop-filter]:bg-black">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -66,6 +68,7 @@ const Navbar = () => {
         </SignedOut>
         <SignedIn>
           <UserButton
+          
           afterSignOutUrl="/"
           />
         </SignedIn>

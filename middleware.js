@@ -10,14 +10,14 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId } = await auth();
-
-  if (!userId && isProtectedRoute(req)) {
-    return NextResponse.redirect(new URL("/", req.url));
+  if (isProtectedRoute(req) && !(await auth()).userId) {
+    const url = new URL("/", req.url);
+    return NextResponse.redirect(url);
   }
-
   return NextResponse.next();
 });
+
+
 
 export const config = {
   matcher: [

@@ -13,7 +13,7 @@ export default function WobbleCardDemo() {
 
      
       <div className="flex flex-row md:flex-row gap-4 mb-2">
-        <WobbleCard containerClassName="bg-black min-h-[200px] w-[50%] md:w-[60%] border" className="bg-black">
+        <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[60%] border" >
           <div className="pt-3 text-white text-center flex flex-col items-center">
             <BrainCircuit className="w-10 h-10 mb-4 text-white"/>
             <h2 className="text-xl font-semibold">AI-Powered career gudiance</h2>
@@ -21,7 +21,7 @@ export default function WobbleCardDemo() {
           </div>
         </WobbleCard>
 
-        <WobbleCard containerClassName="bg-black min-h-[200px] w-[50%] md:w-[40%] border" className="bg-black">
+        <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[40%] border" >
           <div className="pt-3 text-white text-center flex flex-col items-center">
             <Briefcase className="w-10 h-10 mb-4 text-white"/>
             <h2 className="text-xl font-semibold">Interview Preparation</h2>
@@ -32,14 +32,14 @@ export default function WobbleCardDemo() {
 
  
       <div className="flex flex-row md:flex-row gap-4">
-        <WobbleCard containerClassName="bg-black min-h-[200px] w-[50%] md:w-[40%] border" className="bg-black" >
+        <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[40%] border"  >
           <div className="pt-3 text-white text-center flex flex-col items-center">
             <ChartLine className="w-10 h-10 mb-4 text-white"/>
             <h2 className="text-xl font-semibold">Industry Insights</h2>
             <p className="mt-2 text-neutral-300">Stay ahead with real-time industry trends, salary data, and narket analysis.</p>
           </div>
         </WobbleCard>
-        <WobbleCard containerClassName="bg-black min-h-[200px] w-[50%] md:w-[60%] border" className="bg-black">
+        <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[60%] border">
           <div className="pt-3 text-white text-center flex flex-col items-center">
             <Newspaper className="w-10 h-10 mb-4 text-white"/> 
             <h2 className="text-xl font-semibold">Smart Resume Creation</h2>

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "./ui/button"
 import Image from "next/image"
 import { useEffect, useRef } from "react"
+import { SignedIn} from "@clerk/nextjs"
 
 const HeroSection = () => {
  const imageRef = useRef(null);
@@ -41,11 +42,13 @@ const HeroSection = () => {
             </p>
         </div>
         <div className="space-x-5">
+          <SignedIn>
             <Link href="/dashboard">
                 <Button size="lg" className="px-8 cursor-pointer">
-                    Get Started 
+                    Dashboard
                 </Button>
             </Link>
+          </SignedIn>
             <Link href="/">
             <Button size="lg" className="px-8 cursor-pointer" variant="outline">
                 Demo 
@@ -53,13 +56,13 @@ const HeroSection = () => {
             </Link>
         </div>
        <div className="hero-image-wrapper mt-5 md:mt-0  p-2">
-          <div ref={imageRef} className="hero-image rounded-l  shadow-2xl mx-auto " >
+          <div ref={imageRef} className="hero-image rounded-l shadow-2xl mx-auto " >
                 <Image
-                src={"/banner.jpg"}
-                width={1280}
-                height={720}
+                src="/banner02.png"
+                width={920}
+                height={550}
                 alt="Banner MentR2B"
-                className="rounded-lg shadow-2xl bordedr mx-auto"
+                className="rounded-lg shadow-2xl bordedr mx-auto "
                 priority
                 />
             </div>
