@@ -29,12 +29,12 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 
 const DashboardView = ({ insights }) => {
-  // Transform salary data for the chart
   const salaryData = insights.salaryRanges.map((range) => ({
     name: range.role,
     min: range.min / 1000,
     max: range.max / 1000,
     median: range.median / 1000,
+    location: range.location,
   }));
 
   const getDemandLevelColor = (level) => {
@@ -66,7 +66,6 @@ const DashboardView = ({ insights }) => {
   const OutlookIcon = getMarketOutlookInfo(insights.marketOutlook).icon;
   const outlookColor = getMarketOutlookInfo(insights.marketOutlook).color;
 
-  // Format dates using date-fns
   const lastUpdatedDate = format(new Date(insights.lastUpdated), "dd/MM/yyyy");
   const nextUpdateDistance = formatDistanceToNow(
     new Date(insights.nextUpdate),
@@ -76,10 +75,11 @@ const DashboardView = ({ insights }) => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <Badge variant="outline" className={"text-white"}>Last updated: {lastUpdatedDate}</Badge>
+        <Badge variant="outline" className={"text-white"}>
+          Last updated: {lastUpdatedDate}
+        </Badge>
       </div>
 
-      {/* Market Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -101,7 +101,7 @@ const DashboardView = ({ insights }) => {
             <CardTitle className="text-sm font-medium">
               Industry Growth
             </CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <TrendingUp className="h-4 w-4 text-green-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -143,7 +143,6 @@ const DashboardView = ({ insights }) => {
         </Card>
       </div>
 
-      {/* Salary Ranges Chart */}
       <Card className="col-span-4">
         <CardHeader>
           <CardTitle>Salary Ranges by Role</CardTitle>
@@ -161,6 +160,7 @@ const DashboardView = ({ insights }) => {
                 <Tooltip
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
+                      const { location } = payload[0].payload;
                       return (
                         <div className="bg-background border rounded-lg p-2 shadow-md">
                           <p className="font-medium">{label}</p>
@@ -169,6 +169,9 @@ const DashboardView = ({ insights }) => {
                               {item.name}: ${item.value}K
                             </p>
                           ))}
+                          <p className="text-xs text-muted-foreground">
+                             {location}
+                          </p>
                         </div>
                       );
                     }
@@ -184,7 +187,6 @@ const DashboardView = ({ insights }) => {
         </CardContent>
       </Card>
 
-      {/* Industry Trends */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader>

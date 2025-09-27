@@ -28,9 +28,7 @@ export default function WobbleCardDemo() {
             <p className="mt-2 text-neutral-300 ">Practice with role specific questions and get instant feedback to improve your performance  </p>
           </div>
         </WobbleCard>
-      </div>
-
- 
+      </div> 
       <div className="flex flex-row md:flex-row gap-4">
         <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[40%] border"  >
           <div className="pt-3 text-white text-center flex flex-col items-center">
@@ -42,7 +40,7 @@ export default function WobbleCardDemo() {
         <WobbleCard containerClassName=" min-h-[200px] w-[50%] md:w-[60%] border">
           <div className="pt-3 text-white text-center flex flex-col items-center">
             <Newspaper className="w-10 h-10 mb-4 text-white"/> 
-            <h2 className="text-xl font-semibold">Smart Resume Creation</h2>
+            <h2 className="text-xl font-semibold">Smart Creation</h2>
             <p className="mt-2 text-neutral-300">Generate ATS-optimizedre resumes and AI assistance and AI cover letter customized to your company and role.</p>
           </div>
         </WobbleCard>

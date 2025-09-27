@@ -41,6 +41,12 @@ const Navbar = async () => {
                     <DropdownMenuItem asChild>
                         <Link href={"/interview"} className="flex items-center gap-2">
                             <FileText className="h-4 w-4"/>
+                            <span>Quiz</span>                            
+                        </Link>
+                    </DropdownMenuItem>
+                     <DropdownMenuItem asChild>
+                        <Link href={"/ai-Interview"} className="flex items-center gap-2">
+                            <FileText className="h-4 w-4"/>
                             <span>Mock Interview</span>                            
                         </Link>
                     </DropdownMenuItem>
