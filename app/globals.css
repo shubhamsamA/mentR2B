@@ -151,7 +151,7 @@
   .pdf-content h1, .pdf-content h2, .pdf-content h3 {
     font-family: Arial, sans-serif;
     font-weight: bold;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
 
   }
     
@@ -171,7 +171,7 @@
     font-family: Arial, sans-serif;
     font-size: 13px; /* Body text */
     line-height: 1.5;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
   }
 
   .pdf-content a {
@@ -180,6 +180,6 @@
   }
 
   .pdf-content div {
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     font-size: 19px;
   }
