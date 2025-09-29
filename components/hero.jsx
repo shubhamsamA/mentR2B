@@ -38,7 +38,7 @@ const HeroSection = () => {
               your next big move.
             </h1>
             <p className="mx-auto max-w-[600px] text-white md:text-xl">
-              MentR2B combines AI resumes, mock interviews, cover letters, and industry insights to prepare you for every opportunity.
+              MentR2B combines AI resumes, mock interviews, Quiz, cover letters, and industry insights to prepare you for every opportunity.
             </p>
         </div>
         <div className="space-x-5">

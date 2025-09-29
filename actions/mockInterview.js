@@ -34,12 +34,24 @@ export async function generateMockInterview(formData) {
     };
   }
 
-  const prompt = `your are an expert interview coach.
-  Generate ${form.numQuestions} ${form.type} mock interview questions 
-  for a ${form.industry} project ${form.project} professional${form.skills.length ? ` with expertise in ${form.skills.join(", ")}` : ""}.
+  const prompt = `You are an expert professional interviewer.
+Conduct a ${form.type} mock interview with ${form.numQuestions} basic and advance questions for a ${form.industry} project (${form.project}) professional${
+    form.skills.length ? ` with expertise in ${form.skills.join(", ")}` : ""
+  }.
+  if ${form.numQuestions} > 9 can also include small coding question mention in question to code.
+ Follow a 60:40 ratio:
 
-  Each question should also have a sample and not to long "idealAnswer" for evaluation.
+60% skill-based fundamentals questions (directly from ${form.skills}).
 
+40% project-based questions (focused on ${form.project}).
+
+If ${form.type} = "behavioral", ask questions in an HR-style interview format, focusing on real-world workplace scenarios (teamwork, conflict resolution, leadership, problem-solving).
+
+The first question must always be: “Tell me about yourself.”
+
+Phrase every question as if you are the interviewer speaking directly to the candidate.
+
+For each question, also include a  ‘idealAnswer’ (like a candidate’s strong, natural response — concise but realistic).
   Return the response in this JSON format only, no extra text:
   {
     "questions": [
@@ -80,7 +92,6 @@ export async function saveMockInterviewResult(questions, userAnswers) {
     userAnswer: userAnswers[idx] || "",
   }));
 
- 
   const feedbackPrompt = `
   The candidate answered the following mock interview questions:
 
@@ -133,7 +144,7 @@ export async function saveMockInterviewResult(questions, userAnswers) {
         questions: finalResults,
         category: "Mock Interview",
         improvementTip: feedbackData.improvementTip,
-         interviewscore:feedbackData.interviewscore
+        interviewscore: feedbackData.interviewscore,
       },
     });
 

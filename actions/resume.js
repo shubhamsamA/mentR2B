@@ -6,7 +6,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { revalidatePath } from "next/cache";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 export async function saveResume(content) {
   const { userId } = await auth();
@@ -83,7 +83,8 @@ export async function improveWithAI({ current, type }) {
     5. Focus on achievements over responsibilities
     6. Use industry-specific keywords
     
-    Format the response as a single paragraph without any additional text or explanations.
+    Format the response as a short and precise 2 sentence single paragraph without any additional text or explanations.
+    short and precise
   `;
 
   try {

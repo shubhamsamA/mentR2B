@@ -78,12 +78,12 @@ export default function Overview({ mockAssessments }) {
       <div className="space-y-6 mb-10">
         <Card className="border-2 bg-transparent">
           <CardHeader className=" pb-2 flex items-center justify-between mb-2 w-full">
-            <CardTitle className="text-5xl font-bold gradient tracking-tighter text-transparent bg-clip-text pb-2 ">
+            <CardTitle className="text-2xl md:text-5xl font-bold gradient tracking-tighter text-transparent bg-clip-text pb-2 ">
               Overall Performance
             </CardTitle>
-            <Button
+            <Button 
               onClick={() => router.push("/ai-Interview/ai-mock")}
-              className={"hover:cursor-pointer"}
+              className={"hover:cursor-pointer  tracking-tighter"}
             >
               Start New Interview
             </Button>

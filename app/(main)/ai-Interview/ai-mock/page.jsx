@@ -51,6 +51,7 @@ export default function MockInterview() {
   const [formData, setFormData] = useState({
     type: "technical",
     industry: "",
+    project: "",
     experience: 0,
     skills: "",
     numQuestions: 5,
@@ -130,65 +131,88 @@ export default function MockInterview() {
       timeout: 10000,
     });
 
+    // Local state for typed + speech answer
+    const [answer, setAnswer] = useState("");
+
+    // Keep speech-to-text in sync
+    useEffect(() => {
+      if (results.length > 0) {
+        setAnswer(results.join(" "));
+      }
+    }, [results]);
     return (
       <div className="flex justify-center items-start min-h-screen ">
-        <div className="flex flex-col md:flex-row gap-6 w-full max-w-5xl mt-36">
-          <Card className="flex-1 bg-black text-white ">
-            <CardHeader>
-              <CardTitle>
-                Question {questionIndex + 1} of {quizData.length}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-lg font-medium">{question.question}</p>
-            </CardContent>
-          </Card>
+        <div className="flex flex-col w-full max-w-5xl mt-20">
+          <p className="text-center font-bold text-sm text-red-500 mb-4">
+            Remember: This is for practice purposes only, don’t cheat.
+          </p>
 
-          <Card className="flex-1 bg-black text-white">
-            <CardHeader>
-              <CardTitle>Your Answer</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {speechError && <p>Speech recognition not supported 🤷‍</p>}
+          <div className="flex flex-col md:flex-row gap-6 w-full">
+            {/* Question */}
+            <Card className="flex-1 bg-black text-white ">
+              <CardHeader>
+                <CardTitle>
+                  Question {questionIndex + 1} of {quizData.length}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg font-medium">{question.question}</p>
+              </CardContent>
+            </Card>
 
-              {/* Webcam feed */}
-              {showWebcam && (
-                <Webcam className="w-full max-w-md h-64 rounded border" />
-              )}
-              <Button
-                variant="outline" className={" bg-black  mr-2"}
-                onClick={() => setShowWebcam((v) => !v)}
-              >
-                {showWebcam ? "Hide Webcam" : "Show Webcam"}
-              </Button>
+            {/* Answer */}
+            <Card className="flex-1 bg-black text-white">
+              <CardHeader>
+                <CardTitle>Your Answer</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {speechError && <p>Speech recognition not supported 🤷‍</p>}
 
-              <Button
-              variant="outline"
-                onClick={isRecording ? stopSpeechToText : startSpeechToText}
-                className="my-2  bg-black"
-              >
-                {isRecording ? "Stop Recording" : "Start Recording"}
-              </Button>
+                {/* Webcam feed */}
+                {showWebcam && (
+                  <Webcam className="w-full max-w-md h-64 rounded border" />
+                )}
+                <Button
+                  variant="outline"
+                  className={"bg-black mr-2"}
+                  onClick={() => setShowWebcam((v) => !v)}
+                >
+                  {showWebcam ? "Hide Webcam" : "Show Webcam"}
+                </Button>
 
-              <div className="p-2 border rounded bg-black min-h-[80px]">
-                {results.join(" ")}
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-end">
-              <Button
-                onClick={() => {
-                  const answer = results.join(" ") || "";
-                  onAnswer(answer);
-                  onNext(answer);
-                }}
-                disabled={savingResult}
-              >
-                {questionIndex < quizData.length - 1
-                  ? "Next Question"
-                  : "Finish Interview"}
-              </Button>
-            </CardFooter>
-          </Card>
+                <Button
+                  variant="outline"
+                  onClick={isRecording ? stopSpeechToText : startSpeechToText}
+                  className="my-2 bg-black"
+                >
+                  {isRecording ? "Stop Recording" : "Start Recording"}
+                </Button>
+                <p className="mt-2 text-sm text-red-500">
+                  ⚠️ Use the text field only if your answer contains code.
+                </p>
+                {/* Editable textarea */}
+                <textarea
+                  className="w-full p-2 border rounded bg-black min-h-[120px] text-white"
+                  placeholder="Type your answer here or use speech-to-text..."
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                />
+              </CardContent>
+              <CardFooter className="flex justify-end">
+                <Button
+                  onClick={() => {
+                    onAnswer(answer);
+                    onNext(answer);
+                  }}
+                  disabled={savingResult}
+                >
+                  {questionIndex < quizData.length - 1
+                    ? "Next Question"
+                    : "Finish Interview"}
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
         </div>
       </div>
     );
@@ -226,6 +250,17 @@ export default function MockInterview() {
               name="industry"
               value={formData.industry}
               onChange={handleChange}
+              className="w-full rounded-xl mt-2"
+            />
+          </div>
+          <div>
+            <Label htmlFor="project">Projects</Label>
+            <Input
+              id="project"
+              name="project"
+              value={formData.project}
+              onChange={handleChange}
+              placeholder="Projects & internship"
               className="w-full rounded-xl mt-2"
             />
           </div>
@@ -278,7 +313,7 @@ export default function MockInterview() {
       </Card>
     );
   }
-
+  const router = useRouter();
   // --- LOADING ---
   if (generatingQuiz) return <BarLoader width="100%" color="gray-200" />;
   if (resultData) {
@@ -331,7 +366,6 @@ export default function MockInterview() {
     );
   }
 
-  const router = useRouter();
   return (
     <div className="flex justify-center items-center min-h-screen px-2">
       <Button
@@ -351,8 +385,11 @@ export default function MockInterview() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            This mock interview generates questions based on your industry and
-            skills. Answer using your voice.
+            This mock interview generates questions based on your industry,
+            Projects and skills. Answer using your voice.
+          </p>
+          <p className="mt-2 text-sm font-bold text-red-500">
+            ⚠️ This is for practice purposes only, don’t cheat.
           </p>
         </CardContent>
         <CardFooter>

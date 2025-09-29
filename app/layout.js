@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "MentR2B",
   description: "Ai Career  Mentor/Coach ",
+  icons: {
+    icon: "/logo1.png",
+  },
 };
 
 export default function RootLayout({ children }) {
