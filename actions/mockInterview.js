@@ -27,6 +27,7 @@ export async function generateMockInterview(formData) {
     form = {
       type: latestForm.type,
       industry: latestForm.industry || "",
+      role: latestForm.role || "",
       project: latestForm.project,
       experience: latestForm.experience,
       skills: latestForm.skills || [],
@@ -34,34 +35,47 @@ export async function generateMockInterview(formData) {
     };
   }
 
-  const prompt = `You are an expert professional interviewer.
-Conduct a ${form.type} mock interview with ${form.numQuestions} basic and advance questions for a ${form.industry} project (${form.project}) professional${
-    form.skills.length ? ` with expertise in ${form.skills.join(", ")}` : ""
+  const prompt = ` You are a highly experienced professional interviewer with expertise in conducting real-world interviews.
+
+Generate a ${form.type} mock interview with ${
+    form.numQuestions
+  } realistic and challenging questions for a ${form.industry} role ${
+    form.role
+  }, designed for a candidate with ${
+    form.experience
+  } years of professional experience who has worked on a project (${
+    form.project
+  }) ${
+    form.skills.length
+      ? `and possesses strong skills in ${form.skills.join(", ")}`
+      : ""
   }.
-  if ${form.numQuestions} > 9 can also include small coding question mention in question to code.
- Follow a 60:40 ratio:
 
-60% skill-based fundamentals questions (directly from ${form.skills}).
+Guidelines:
+1. The interview should feel realistic and conversational, as if you are speaking directly to the candidate.
+2. Maintain a **70:30 ratio**:
+   - 70% skill-based/fundamental questions derived from ${form.skills}, ${form.role}, and ${form.industry}.
+   - 30% project-based and scenario-driven questions focused on ${form.project}.
+3. If ${
+    form.numQuestions
+  } > 9, include 1–2 short coding or problem-solving questions (mention clearly: “Please write or explain your approach to…”).
+4. The **first question must always be:** “Tell me about yourself.”
+5. If ${
+    form.type
+  } = "behavioral", focus on real-world HR-style questions that test communication, teamwork, leadership, and conflict resolution.
+6. Each question should sound natural and professional — like an actual interviewer would ask.
+7. For every question, provide an "idealAnswer" that represents a strong, concise, and realistic response from a well-prepared candidate.
 
-40% project-based questions (focused on ${form.project}).
-
-If ${form.type} = "behavioral", ask questions in an HR-style interview format, focusing on real-world workplace scenarios (teamwork, conflict resolution, leadership, problem-solving).
-
-The first question must always be: “Tell me about yourself.”
-
-Phrase every question as if you are the interviewer speaking directly to the candidate.
-
-For each question, also include a  ‘idealAnswer’ (like a candidate’s strong, natural response — concise but realistic).
-  Return the response in this JSON format only, no extra text:
-  {
-    "questions": [
-      {
-        "question": "string",
-        "idealAnswer": "string"
-      }
-    ]
-  }
-  `;
+Output format (JSON only, no extra text):
+{
+  "questions": [
+    {
+      "question": "string",
+      "idealAnswer": "string"
+    }
+  ]
+}
+`;
 
   try {
     const result = await model.generateContent(prompt);

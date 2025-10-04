@@ -84,6 +84,7 @@ export default function QuizWithForm() {
   const handleSubmitForm = async () => {
     try {
   // Validate raw inputs
+
   interviewFormSchema.parse(formData);
 
 
@@ -99,8 +100,8 @@ export default function QuizWithForm() {
       if (!res.ok) throw new Error("Failed to submit form");
 
       toast.success("Form submitted! Generating quiz...");
-      await generateQuizFn(payload);
       setFormOpen(false);
+      await generateQuizFn(payload);
     } catch (err) {
       console.error(err);
       toast.error( "Fill all Field");

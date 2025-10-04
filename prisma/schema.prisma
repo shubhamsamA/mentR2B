@@ -125,6 +125,7 @@ model InterviewForm {
   type         String
   industry     String?
   project      String?
+  role         String?
   experience   Int
   skills       String[]
   numQuestions Int

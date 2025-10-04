@@ -83,7 +83,7 @@ export async function improveWithAI({ current, type }) {
     5. Focus on achievements over responsibilities
     6. Use industry-specific keywords
     
-    Format the response as a short and precise 2 sentence single paragraph without any additional text or explanations.
+    Format the response as a short short and precise 2 sentence single paragraph without any additional text or explanations.
     short and precise
   `;
 

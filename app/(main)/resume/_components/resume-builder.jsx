@@ -24,7 +24,6 @@ import { useUser } from "@clerk/nextjs";
 
 import { resumeSchema } from "@/lib/schema";
 import { entriesToMarkdown } from "@/lib/helper";
-import html2pdfMin from "html2pdf.js/dist/html2pdf.min.js";
 
 export default function ResumeBuilder({ initialContent }) {
   const [activeTab, setActiveTab] = useState("edit");
@@ -92,7 +91,7 @@ export default function ResumeBuilder({ initialContent }) {
     if (contactInfo.twitter) parts.push(` [Twitter](${contactInfo.twitter})`);
 
     return parts.length > 0
-      ? `## <div align="center">${user.fullName}</div>
+      ? `# <div align="center">${user.fullName}</div>
         \n\n<div align="center">\n\n${parts.join(" | ")}\n\n</div>`
       : "";
   };
@@ -101,8 +100,8 @@ export default function ResumeBuilder({ initialContent }) {
     const { summary, skills, experience, education, projects } = formValues;
     return [
       getContactMarkdown(),
-      summary && `#### Professional Summary\n\n${summary}`,
-      skills && `#### Skills\n\n${skills}`,
+      summary && `## Professional Summary\n\n${summary}`,
+      skills && `## Skills\n\n${skills}`,
       entriesToMarkdown(experience, "Work Experience"),
       entriesToMarkdown(education, "Education"),
       entriesToMarkdown(projects, "Projects"),
@@ -112,59 +111,31 @@ export default function ResumeBuilder({ initialContent }) {
   };
 
   const [isGenerating, setIsGenerating] = useState(false);
-  const fixUnsupportedColors = (root) => {
-  if (!root) return;
-  const all = root.querySelectorAll("*");
-  all.forEach((el) => {
-    const style = window.getComputedStyle(el);
-    if (style.color.includes("lab")) el.style.color = "#000"; // fallback text
-    if (style.backgroundColor.includes("lab")) el.style.backgroundColor = "#fff"; // fallback bg
-    if (style.borderColor.includes("lab")) el.style.borderColor = "#000"; // fallback border
-  });
+ const generatePDF = async () => {
+  setIsGenerating(true);
+  try {
+    const res = await fetch("/api/resume-pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ markdown: previewContent }),
+    });
+
+    if (!res.ok) throw new Error("Failed to generate PDF");
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "resume.pdf";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error("PDF generation error:", err);
+    toast.error("Failed to generate PDF");
+  } finally {
+    setIsGenerating(false);
+  }
 };
-
-
-  const generatePDF = async () => {
-    setIsGenerating(true);
-
-
-    
-
-    // Fix unsupported colors before generating PDF
-    fixUnsupportedColors(document.getElementById("resume-pdf"));
-    try {
-      const element = document.getElementById("resume-pdf");
-      
-      if (!element) return;
-
-    // Apply base styles
-    element.style.fontFamily = "Arial, sans-serif"; // body font
-    element.style.fontSize = "12pt"; // body text
-    element.style.lineHeight = "1.4";
-    element.style.color = "#000"; // fallback black
-
-    // Scale headings
-    element.querySelectorAll("h1").forEach(el => el.style.fontSize = "14pt");
-    element.querySelectorAll("h2").forEach(el => el.style.fontSize = "13pt");
-    element.querySelectorAll("h3").forEach(el => el.style.fontSize = "12pt");
-    element.querySelectorAll("h4").forEach(el => el.style.fontSize = "11pt");
-    element.querySelectorAll("h5").forEach(el => el.style.fontSize = "10pt");
-    element.querySelectorAll("h6").forEach(el => el.style.fontSize = "9pt");
-      const opt = {
-        margin: [15, 15],
-        filename: "resume.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 1 },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      };
-
-      await html2pdfMin().set(opt).from(element).save();
-    } catch (error) {
-      console.error("PDF generation error:", error);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
 
   const onSubmit = async (data) => {
     try {

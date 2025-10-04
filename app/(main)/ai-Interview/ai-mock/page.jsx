@@ -51,6 +51,7 @@ export default function MockInterview() {
   const [formData, setFormData] = useState({
     type: "technical",
     industry: "",
+    role: "",
     project: "",
     experience: 0,
     skills: "",
@@ -253,6 +254,18 @@ export default function MockInterview() {
               className="w-full rounded-xl mt-2"
             />
           </div>
+              <div>
+                <Label htmlFor="role">Role</Label>
+                <Input
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  placeholder="about the role"
+                  className="w-full rounded-xl mt-2"
+                />   
+              </div>
+
           <div>
             <Label htmlFor="project">Projects</Label>
             <Input
