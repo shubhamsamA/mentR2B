@@ -241,6 +241,7 @@ export default function MockInterview() {
               <SelectContent>
                 <SelectItem value="technical">Technical</SelectItem>
                 <SelectItem value="behavioral">Behavioral</SelectItem>
+                <SelectItem value="coding">Coding</SelectItem>
               </SelectContent>
             </Select>
           </div>
