@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MentR2B - AI Career Mentor & Coach
 
-## Getting Started
+MentR2B is an AI-powered career mentoring platform designed to help users land their dream jobs. It provides comprehensive tools including AI mock interviews, resume building, cover letter generation, and personalized career guidance.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **🤖 AI Mock Interviews:** Practice interviews with real-time AI feedback using your webcam and microphone.
+- **📄 Smart Resume Builder:** Create professional, ATS-friendly resumes with AI assistance and export them to PDF.
+- **✉️ AI Cover Letter Generator:** Generate tailored cover letters for specific job descriptions instantly.
+- **📊 Career Dashboard:** Track your interview performance, success rates, and career progression with interactive charts.
+- **💼 Industry-Specific Guidance:** Get tailored advice and interview questions for over 50+ industries.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Framework:** Next.js 15 (App Router)
+- **Authentication:** Clerk
+- **Database:** PostgreSQL with Prisma ORM
+- **AI Integration:** Google Generative AI (Gemini)
+- **Background Jobs:** Inngest
+- **UI & Styling:** Tailwind CSS, Radix UI, Framer Motion
+- **Forms & Validation:** React Hook Form, Zod
+- **Media & Export:** React Webcam, React Hook Speech-to-Text, html2pdf.js
+- **Charts:** Recharts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💻 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (v18 or higher)
+- npm, yarn, pnpm, or bun
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shubhamsamA/mentR2B.git
+   cd mentR2B
+   ```
 
-## Deploy on Vercel
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add the following keys:
+   ```env
+   # Clerk Authentication
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   # Database (Prisma)
+   DATABASE_URL=your_database_url
+
+   # Google Generative AI
+   GEMINI_API_KEY=your_gemini_api_key
+
+   # Inngest
+   INNGEST_EVENT_KEY=your_inngest_event_key
+   INNGEST_SIGNING_KEY=your_inngest_signing_key
+   ```
+
+4. Initialize the database:
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/shubhamsamA/mentR2B/issues).
+
+## 📝 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
